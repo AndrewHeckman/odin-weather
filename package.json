@@ -1,7 +1,7 @@
 {
-  "name": "webpack-template",
+  "name": "odin-weather",
   "version": "1.0.0",
-  "description": "",
+  "description": "Initialize using \"npm init\", then \"npm install\", then \"npm init @eslint/config@latest\".",
   "main": "index.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
