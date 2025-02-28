@@ -57,7 +57,7 @@ header {
   grid-column: 1 / span 2;
 }
 
-#weather {
+#home {
   width: clamp(20rem, calc(100% * 2 / 3), 100rem);
   margin: auto;
   grid-template-columns: 2fr 1fr;
@@ -69,6 +69,14 @@ header {
   grid-row: 2 / span 4;
 }
 
+.day {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 #current {
   grid-template-columns: 1fr 1fr;
+}
+
+.hour {
+  grid-template-columns: repeat(4, 1fr);
 }
