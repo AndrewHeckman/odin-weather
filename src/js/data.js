@@ -1,4 +1,15 @@
-export default async function getData() {
+export default async function getData(searchTerm) {
+  if (searchTerm) {
+    let data = await getWeather(searchTerm);
+    if (data) {
+      sessionStorage.setItem("data", JSON.stringify(data));
+      return data;
+    }
+    else {
+      alert("City not found");
+    }
+  }
+
   let data = JSON.parse(sessionStorage.getItem("data"));
   
   if (!data) {
@@ -49,12 +60,20 @@ export default async function getData() {
         description: data.description,
         dewPoint: data.currentConditions.dew,
         feelsLike: data.currentConditions.feelslike,
+        high: data.days[0].tempmax,
+        low: data.days[0].tempmin,
         humidity: data.currentConditions.humidity,
         icon: data.currentConditions.icon,
+        // there might be a better way to do this. i got this solution from
+        // https://stackoverflow.com/questions/42118296/dynamically-import-images-from-a-directory-using-webpack
+        // but eslint doesn't like it, and it's not something i've seen before
+        // possibly writing a function to import and return the image would be better
+        iconSrc: require(`../img/icons/${data.currentConditions.icon}.svg`),
         moonPhase: data.currentConditions.moonphase,
         precipitation: data.currentConditions.precip,
         precipitationProbability: data.currentConditions.precipprob,
         precipitationType: data.currentConditions.preciptype,
+        precipitationTypeString: formatPrecipitationType(data.currentConditions.preciptype),
         pressure: data.currentConditions.pressure,
         snow: data.currentConditions.snow,
         snowDepth: data.currentConditions.snowdepth,
@@ -64,6 +83,7 @@ export default async function getData() {
         uvIndex: data.currentConditions.uvindex,
         visibility: data.currentConditions.visibility,
         windDirection: data.currentConditions.winddir,
+        windDirectionString: formatWindDirection(data.currentConditions.winddir),
         windGust: data.currentConditions.windgust,
         windSpeed: data.currentConditions.windspeed,
         days: data.days.map(parseDay),
@@ -76,26 +96,27 @@ export default async function getData() {
           conditions: day.conditions,
           description: day.description,
           dewPoint: day.dew,
-          feelsLikeMax: day.feelslikemax,
-          feelsLikeMin: day.feelslikemin,
           humidity: day.humidity,
           icon: day.icon,
+          iconSrc: require(`../img/icons/${day.icon}.svg`),
           moonPhase: day.moonphase,
           precipitation: day.precip,
           precipitationCover: day.precipcover,
           precipitationProbability: day.precipprob,
           precipitationType: day.preciptype,
+          precipitationTypeString: formatPrecipitationType(day.preciptype),
           pressure: day.pressure,
           severeRisk: day.severerisk,
           snow: day.snow,
           snowDepth: day.snowdepth,
           sunrise: day.sunrise,
           sunset: day.sunset,
-          temperatureMax: day.tempmax,
-          temperatureMin: day.tempmin,
+          high: day.tempmax,
+          low: day.tempmin,
           uvIndex: day.uvindex,
           visibility: day.visibility,
           windDirection: day.winddir,
+          windDirectionString: formatWindDirection(day.winddir),
           windGust: day.windgust,
           windSpeed: day.windspeed,
           hours: day.hours.map(parseHour),
@@ -110,9 +131,11 @@ export default async function getData() {
             feelsLike: hour.feelslike,
             humidity: hour.humidity,
             icon: hour.icon,
+            iconSrc: require(`../img/icons/${hour.icon}.svg`),
             precipitation: hour.precip,
             precipitationProbability: hour.precipprob,
             precipitationType: hour.preciptype,
+            precipitationTypeString: formatPrecipitationType(hour.preciptype),
             pressure: hour.pressure,
             severeRisk: hour.severerisk,
             snow: hour.snow,
@@ -121,10 +144,33 @@ export default async function getData() {
             uvIndex: hour.uvindex,
             visibility: hour.visibility,
             windDirection: hour.winddir,
+            windDirectionString: formatWindDirection(hour.winddir),
             windGust: hour.windgust,
             windSpeed: hour.windspeed,
           };
         }
+      }
+
+      function formatPrecipitationType(precipArray) {
+        let precipType = "";
+        if (!precipArray) {
+          precipType = "rain";
+        } else {
+          for (let i = 0; i < precipArray.length; i++) {
+            precipType += precipArray[i];
+      
+            if (i !== precipArray.length - 1) {
+              precipType += ", ";
+            }
+          }
+        }
+        return precipType;
+      }
+      
+      function formatWindDirection(degrees) {
+        const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
+        const index = Math.round(degrees / 45) % 8;
+        return directions[index];
       }
     }
   }

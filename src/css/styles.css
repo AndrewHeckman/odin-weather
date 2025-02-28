@@ -73,7 +73,23 @@ header {
   grid-template-columns: repeat(4, 1fr);
 }
 
+.icon {
+  height: 2.5rem;
+  aspect-ratio: 1/1;
+  margin: auto;
+}
+
 #current {
+  grid-template-columns: 1fr 1fr;
+}
+
+#current-icon {
+  height: 10rem;
+  aspect-ratio: 1/1;
+  margin: auto;
+}
+
+#details {
   grid-template-columns: 1fr 1fr;
 }
 

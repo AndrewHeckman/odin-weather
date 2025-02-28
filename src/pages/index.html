@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Untitled Weather App</title>
+    <title>Weather App</title>
   </head>
   <body class="flex flex-column">
     <header class="grid">
@@ -21,84 +21,249 @@
         />
         <button id="search-button">Search</button>
       </div>
-      <nav>
+      <!-- <nav>
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="hours.html">Hourly</a></li>
           <li><a href="weeks.html">2-Week</a></li>
         </ul>
-      </nav>
+      </nav> -->
     </header>
     <main id="home" class="grid">
       <h3 id="location-info">
-        <span id="location">Location</span>
-        <span id="date">as of 12:12</span>
+        <span id="location">Location</span>,
+        as of <span id="date">time</span>.
       </h3>
       <div id="week">
-        <div class="day grid">
-          <span>Date</span>
-          <span>Icon</span>
-          <span><span>High</span>/<span>Low</span></span>
-          <span>Conditions</span>
+        <div id="day-1" class="day grid">
+          <p id="day-1-date">Date</p>
+          <img id="day-1-icon" class="icon"/>
+          <p>
+            High: <span id="day-1-high">High</span>
+            Low: <span id="day-1-low">Low</span>
+          </p>
+          <p id="day-1-conditions">Conditions</p>
         </div>
-        <div>Day 2</div>
-        <div>Day 3</div>
-        <div>Day 4</div>
-        <div>Day 5</div>
-        <div>Day 6</div>
-        <div>Day 7</div>
+        <div id="day-2" class="day grid">
+          <p id="day-2-date">Date</p>
+          <img id="day-2-icon" class="icon"/>
+          <p>
+            High: <span id="day-2-high">High</span>
+            Low: <span id="day-2-low">Low</span>
+          </p>
+          <p id="day-2-conditions">Conditions</p>
+        </div>
+        <div id="day-3" class="day grid">
+          <p id="day-3-date">Date</p>
+          <img id="day-3-icon" class="icon"/>
+          <p>
+            High: <span id="day-3-high">High</span>
+            Low: <span id="day-3-low">Low</span>
+          </p>
+          <p id="day-3-conditions">Conditions</p>
+        </div>
+        <div id="day-4" class="day grid">
+          <p id="day-4-date">Date</p>
+          <img id="day-4-icon" class="icon"/>
+          <p>
+            High: <span id="day-4-high">High</span>
+            Low: <span id="day-4-low">Low</span>
+          </p>
+          <p id="day-4-conditions">Conditions</p>
+        </div>
+        <div id="day-5" class="day grid">
+          <p id="day-5-date">Date</p>
+          <img id="day-5-icon" class="icon"/>
+          <p>
+            High: <span id="day-5-high">High</span>
+            Low: <span id="day-5-low">Low</span>
+          </p>
+          <p id="day-5-conditions">Conditions</p>
+        </div>
+        <div id="day-6" class="day grid">
+          <p id="day-6-date">Date</p>
+          <img id="day-6-icon" class="icon"/>
+          <p>
+            High: <span id="day-6-high">High</span>
+            Low: <span id="day-6-low">Low</span>
+          </p>
+          <p id="day-6-conditions">Conditions</p>
+        </div>
+        <div id="day-7" class="day grid">
+          <p id="day-7-date">Date</p>
+          <img id="day-7-icon" class="icon"/>
+          <p>
+            High: <span id="day-7-high">High</span>
+            Low: <span id="day-7-low">Low</span>
+          </p>
+          <p id="day-7-conditions">Conditions</p>
+        </div>
+        <div id="day-8" class="day grid">
+          <p id="day-8-date">Date</p>
+          <img id="day-8-icon" class="icon"/>
+          <p>
+            High: <span id="day-8-high">High</span>
+            Low: <span id="day-8-low">Low</span>
+          </p>
+          <p id="day-8-conditions">Conditions</p>
+        </div>
+        <div id="day-9" class="day grid">
+          <p id="day-9-date">Date</p>
+          <img id="day-9-icon" class="icon"/>
+          <p>
+            High: <span id="day-9-high">High</span>
+            Low: <span id="day-9-low">Low</span>
+          </p>
+          <p id="day-9-conditions">Conditions</p>
+        </div>
+        <div id="day-10" class="day grid">
+          <p id="day-10-date">Date</p>
+          <img id="day-10-icon" class="icon"/>
+          <p>
+            High: <span id="day-10-high">High</span>
+            Low: <span id="day-10-low">Low</span>
+          </p>
+          <p id="day-10-conditions">Conditions</p>
+        </div>
+        <div id="day-11" class="day grid">
+          <p id="day-11-date">Date</p>
+          <img id="day-11-icon" class="icon"/>
+          <p>
+            High: <span id="day-11-high">High</span>
+            Low: <span id="day-11-low">Low</span>
+          </p>
+          <p id="day-11-conditions">Conditions</p>
+        </div>
+        <div id="day-12" class="day grid">
+          <p id="day-12-date">Date</p>
+          <img id="day-12-icon" class="icon"/>
+          <p>
+            High: <span id="day-12-high">High</span>
+            Low: <span id="day-12-low">Low</span>
+          </p>
+          <p id="day-12-conditions">Conditions</p>
+        </div>
+        <div id="day-13" class="day grid">
+          <p id="day-13-date">Date</p>
+          <img id="day-13-icon" class="icon"/>
+          <p>
+            High: <span id="day-13-high">High</span>
+            Low: <span id="day-13-low">Low</span>
+          </p>
+          <p id="day-13-conditions">Conditions</p>
+        </div>
+        <div id="day-14" class="day grid">
+          <p id="day-14-date">Date</p>
+          <img id="day-14-icon" class="icon"/>
+          <p>
+            High: <span id="day-14-high">High</span>
+            Low: <span id="day-14-low">Low</span>
+          </p>
+          <p id="day-14-conditions">Conditions</p>
+        </div>
       </div>
-      <!-- description of today's weather -->
       <div id="desc">Description</div>
       <div id="current" class="grid">
         <div id="current-weather">
           <p>Feels like <span id="current-feels"></span></p>
-          <p>Conditions <span id="current-conditions"></span></p>
+          <p id="current-conditions"></p>
           <p>
-            <span id="current-high">High</span>/<span id="current-low"
-              >Low</span
-            >
+            High: <span id="current-high">High</span>
+            Low: <span id="current-low">Low</span>
           </p>
         </div>
-        <div id="current-icon">Icon</div>
+        <img id="current-icon" />
       </div>
-      <div id="details">Details</div>
+      <div id="details" class="grid">
+        <p>Precipitation: 
+          <span id="precipitation"></span>%
+          chance of <span id="precipitation-type"></span>
+        </p>
+        <p>Humidity: <span id="humidity"></span></p>
+        <p>Wind:
+          <span id="wind-speed"></span> mph
+          <span id="wind-direction"></span>
+        </p>
+        <p>Pressure: <span id="pressure"></span></p>
+        <p>Dew point: <span id="dew-point"></span></p>
+        <p>UV Index: <span id="uv-index"></span></p>
+        <p>Visibility: <span id="visibility"></span></p>
+        <p>Moon phase: <span id="moon-phase"></span></p>
+        <p>Sunrise: <span id="sunrise"></span></p>
+        <p>Sunset: <span id="sunset"></span></p>
+      </div>
       <div id="hours">
         <div id="hour-1" class="hour grid">
-          <span>Time</span>
-          <span>Icon</span>
-          <span>Temp</span>
-          <span>Conditions</span>
+          <span id="hour-1-time">Time</span>
+          <img id="hour-1-icon" class="icon"/>
+          <span id="hour-1-temp">Temp</span>
+          <span id="hour-1-conditions">Conditions</span>
         </div>
         <div id="hour-2" class="hour grid">
-          <span>Time</span>
-          <span>Icon</span>
-          <span>Temp</span>
-          <span>Conditions</span>
+          <span id="hour-2-time">Time</span>
+          <img id="hour-2-icon" class="icon"/>
+          <span id="hour-2-temp">Temp</span>
+          <span id="hour-2-conditions">Conditions</span>
         </div>
         <div id="hour-3" class="hour grid">
-          <span>Time</span>
-          <span>Icon</span>
-          <span>Temp</span>
-          <span>Conditions</span>
+          <span id="hour-3-time">Time</span>
+          <img id="hour-3-icon" class="icon"/>
+          <span id="hour-3-temp">Temp</span>
+          <span id="hour-3-conditions">Conditions</span>
         </div>
         <div id="hour-4" class="hour grid">
-          <span>Time</span>
-          <span>Icon</span>
-          <span>Temp</span>
-          <span>Conditions</span>
+          <span id="hour-4-time">Time</span>
+          <img id="hour-4-icon" class="icon"/>
+          <span id="hour-4-temp">Temp</span>
+          <span id="hour-4-conditions">Conditions</span>
         </div>
         <div id="hour-5" class="hour grid">
-          <span>Time</span>
-          <span>Icon</span>
-          <span>Temp</span>
-          <span>Conditions</span>
+          <span id="hour-5-time">Time</span>
+          <img id="hour-5-icon" class="icon"/>
+          <span id="hour-5-temp">Temp</span>
+          <span id="hour-5-conditions">Conditions</span>
         </div>
         <div id="hour-6" class="hour grid">
-          <span>Time</span>
-          <span>Icon</span>
-          <span>Temp</span>
-          <span>Conditions</span>
+          <span id="hour-6-time">Time</span>
+          <img id="hour-6-icon" class="icon"/>
+          <span id="hour-6-temp">Temp</span>
+          <span id="hour-6-conditions">Conditions</span>
+        </div>
+        <div id="hour-7" class="hour grid">
+          <span id="hour-7-time">Time</span>
+          <img id="hour-7-icon" class="icon"/>
+          <span id="hour-7-temp">Temp</span>
+          <span id="hour-7-conditions">Conditions</span>
+        </div>
+        <div id="hour-8" class="hour grid">
+          <span id="hour-8-time">Time</span>
+          <img id="hour-8-icon" class="icon"/>
+          <span id="hour-8-temp">Temp</span>
+          <span id="hour-8-conditions">Conditions</span>
+        </div>
+        <div id="hour-9" class="hour grid">
+          <span id="hour-9-time">Time</span>
+          <img id="hour-9-icon" class="icon"/>
+          <span id="hour-9-temp">Temp</span>
+          <span id="hour-9-conditions">Conditions</span>
+        </div>
+        <div id="hour-10" class="hour grid">
+          <span id="hour-10-time">Time</span>
+          <img id="hour-10-icon" class="icon"/>
+          <span id="hour-10-temp">Temp</span>
+          <span id="hour-10-conditions">Conditions</span>
+        </div>
+        <div id="hour-11" class="hour grid">
+          <span id="hour-11-time">Time</span>
+          <img id="hour-11-icon" class="icon"/>
+          <span id="hour-11-temp">Temp</span>
+          <span id="hour-11-conditions">Conditions</span>
+        </div>
+        <div id="hour-12" class="hour grid">
+          <span id="hour-12-time">Time</span>
+          <img id="hour-12-icon" class="icon"/>
+          <span id="hour-12-temp">Temp</span>
+          <span id="hour-12-conditions">Conditions</span>
         </div>
       </div>
     </main>
