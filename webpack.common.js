@@ -10,7 +10,16 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: "./src/template.html",
+      filename: "index.html",
+      template: "./src/pages/index.html",
+    }),
+    new HtmlWebpackPlugin({
+      filename: "hours.html",
+      template: "./src/pages/hours.html",
+    }),
+    new HtmlWebpackPlugin({
+      filename: "weeks.html",
+      template: "./src/pages/weeks.html",
     }),
   ],
   module: {

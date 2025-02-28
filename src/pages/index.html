@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Untitled Weather App</title>
+  </head>
+  <body class="flex flex-column">
+    <header class="grid">
+      <div id="title-card">
+        <!-- Logo -->
+        <h1>Weather App</h1>
+      </div>
+      <div id="search">
+        <label id="search-label" for="search">Location</label>
+        <input
+          id="search-input"
+          type="text"
+          name="search"
+          placeholder="Location"
+        />
+        <button id="search-button">Search</button>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="hours.html">Hourly</a></li>
+          <li><a href="weeks.html">2-Week</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main id="weather" class="grid">
+      <h3 id="location-info">
+        <span id="location">Location</span>
+        <span id="date">as of 12:12</span>
+      </h3>
+      <div id="week">
+        <div>day 1</div>
+        <div>day 2</div>
+        <div>day 3</div>
+        <div>day 4</div>
+        <div>day 5</div>
+        <div>day 6</div>
+        <div>day 7</div>
+      </div>
+      <!-- description of today's weather -->
+      <div id="desc">description</div>
+      <div id="current" class="grid">
+        <div id="current-weather">
+          <p>Feels like <span id="current-feels"></span></p>
+          <p>Conditions <span id="current-conditions"></span></p>
+          <p><span id="current-high">High</span>/<span id="current-low">Low</span></p>
+        </div>
+        <div id="current-icon">icon</div>
+      </div>
+      <div id="details">details</div>
+      <div id="hours">hours</div>
+    </main>
+  </body>
+</html>
