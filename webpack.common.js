@@ -7,14 +7,14 @@ module.exports = {
       import: "./src/js/index.js",
       dependOn: "shared",
     },
-    hours: {
-      import: "./src/js/hours.js",
-      dependOn: "shared",
-    },
-    weeks: {
-      import: "./src/js/weeks.js",
-      dependOn: "shared",
-    },
+    // hours: {
+    //   import: "./src/js/hours.js",
+    //   dependOn: "shared",
+    // },
+    // weeks: {
+    //   import: "./src/js/weeks.js",
+    //   dependOn: "shared",
+    // },
     shared: "./src/js/data.js",
   },
   output: {
@@ -27,14 +27,14 @@ module.exports = {
       filename: "index.html",
       template: "./src/pages/index.html",
     }),
-    new HtmlWebpackPlugin({
-      filename: "hours.html",
-      template: "./src/pages/hours.html",
-    }),
-    new HtmlWebpackPlugin({
-      filename: "weeks.html",
-      template: "./src/pages/weeks.html",
-    }),
+    // new HtmlWebpackPlugin({
+    //   filename: "hours.html",
+    //   template: "./src/pages/hours.html",
+    // }),
+    // new HtmlWebpackPlugin({
+    //   filename: "weeks.html",
+    //   template: "./src/pages/weeks.html",
+    // }),
   ],
   module: {
     rules: [

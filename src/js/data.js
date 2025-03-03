@@ -1,17 +1,18 @@
+import { getIconSrc, getBackgroundSrc } from "./img";
+
 export default async function getData(searchTerm) {
   if (searchTerm) {
     let data = await getWeather(searchTerm);
     if (data) {
       sessionStorage.setItem("data", JSON.stringify(data));
       return data;
-    }
-    else {
+    } else {
       alert("City not found");
     }
   }
 
   let data = JSON.parse(sessionStorage.getItem("data"));
-  
+
   if (!data) {
     let coords = await getLocation();
     if (coords) {
@@ -27,7 +28,7 @@ export default async function getData(searchTerm) {
     data = await getWeather(data.city);
     sessionStorage.setItem("data", JSON.stringify(data));
   }
-  
+
   return data;
 
   async function getWeather(city) {
@@ -45,18 +46,19 @@ export default async function getData(searchTerm) {
       console.error(error);
       return null;
     }
-  
+
     function parseData(data) {
       if (!data) {
         return null;
       }
-  
+
       return {
         city: data.resolvedAddress,
         epoch: data.currentConditions.datetimeEpoch,
         cloudCover: data.currentConditions.cloudcover,
         conditions: data.currentConditions.conditions,
         dateTime: data.currentConditions.datetime,
+        dateTimeString: formatTime(data.currentConditions.datetime),
         description: data.description,
         dewPoint: data.currentConditions.dew,
         feelsLike: data.currentConditions.feelslike,
@@ -64,31 +66,32 @@ export default async function getData(searchTerm) {
         low: data.days[0].tempmin,
         humidity: data.currentConditions.humidity,
         icon: data.currentConditions.icon,
-        // there might be a better way to do this. i got this solution from
-        // https://stackoverflow.com/questions/42118296/dynamically-import-images-from-a-directory-using-webpack
-        // but eslint doesn't like it, and it's not something i've seen before
-        // possibly writing a function to import and return the image would be better
-        iconSrc: require(`../img/icons/${data.currentConditions.icon}.svg`),
-        moonPhase: data.currentConditions.moonphase,
+        iconSrc: getIconSrc(data.currentConditions.icon),
+        backgroundSrc: getBackgroundSrc(data.currentConditions.icon),
+        moonPhase: formatMoonPhase(data.currentConditions.moonphase),
         precipitation: data.currentConditions.precip,
         precipitationProbability: data.currentConditions.precipprob,
         precipitationType: data.currentConditions.preciptype,
-        precipitationTypeString: formatPrecipitationType(data.currentConditions.preciptype),
+        precipitationTypeString: formatPrecipitationType(
+          data.currentConditions.preciptype,
+        ),
         pressure: data.currentConditions.pressure,
         snow: data.currentConditions.snow,
         snowDepth: data.currentConditions.snowdepth,
-        sunrise: data.currentConditions.sunrise,
-        sunset: data.currentConditions.sunset,
+        sunrise: formatTime(data.currentConditions.sunrise),
+        sunset: formatTime(data.currentConditions.sunset),
         temperature: data.currentConditions.temp,
         uvIndex: data.currentConditions.uvindex,
         visibility: data.currentConditions.visibility,
         windDirection: data.currentConditions.winddir,
-        windDirectionString: formatWindDirection(data.currentConditions.winddir),
+        windDirectionString: formatWindDirection(
+          data.currentConditions.winddir,
+        ),
         windGust: data.currentConditions.windgust,
         windSpeed: data.currentConditions.windspeed,
         days: data.days.map(parseDay),
       };
-  
+
       function parseDay(day) {
         return {
           dateTime: day.datetime,
@@ -98,8 +101,8 @@ export default async function getData(searchTerm) {
           dewPoint: day.dew,
           humidity: day.humidity,
           icon: day.icon,
-          iconSrc: require(`../img/icons/${day.icon}.svg`),
-          moonPhase: day.moonphase,
+          iconSrc: getIconSrc(day.icon),
+          moonPhase: formatMoonPhase(day.moonphase),
           precipitation: day.precip,
           precipitationCover: day.precipcover,
           precipitationProbability: day.precipprob,
@@ -121,17 +124,18 @@ export default async function getData(searchTerm) {
           windSpeed: day.windspeed,
           hours: day.hours.map(parseHour),
         };
-  
+
         function parseHour(hour) {
           return {
             dateTime: hour.datetime,
+            dateTimeString: formatTime(hour.datetime),
             cloudCover: hour.cloudcover,
             conditions: hour.conditions,
             dewPoint: hour.dew,
             feelsLike: hour.feelslike,
             humidity: hour.humidity,
             icon: hour.icon,
-            iconSrc: require(`../img/icons/${hour.icon}.svg`),
+            iconSrc: getIconSrc(hour.icon),
             precipitation: hour.precip,
             precipitationProbability: hour.precipprob,
             precipitationType: hour.preciptype,
@@ -158,7 +162,7 @@ export default async function getData(searchTerm) {
         } else {
           for (let i = 0; i < precipArray.length; i++) {
             precipType += precipArray[i];
-      
+
             if (i !== precipArray.length - 1) {
               precipType += ", ";
             }
@@ -166,15 +170,64 @@ export default async function getData(searchTerm) {
         }
         return precipType;
       }
-      
+
       function formatWindDirection(degrees) {
         const directions = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"];
         const index = Math.round(degrees / 45) % 8;
         return directions[index];
       }
+
+      function formatTime(time) {
+        time = time.substring(0, 5);
+
+        if (time.substring(0, 2) > 12) {
+          time = `${time.substring(0, 2) - 12}${time.substring(2)} PM`;
+        }
+        else if (time.substring(0, 2) === "12") {
+          time += "PM";
+        }
+        else if (time.substring(0, 2) === "00") {
+          time = `12${time.substring(2)} AM`;
+        }
+        else if (time.substring(0, 1) === "0") {
+          time = `${time.substring(1)} AM`;
+        }
+        else {
+          time = `${time} AM`;
+        }
+
+        return time;
+      }
+
+      function formatMoonPhase(phase) {
+        if (phase == 0) {
+          return "new moon";
+        }
+        else if (phase < 0.25) {
+          return "waxing crescent";
+        }
+        else if (phase == 0.25) {
+          return "first quarter";
+        }
+        else if (phase < 0.5) {
+          return "waxing gibbous";
+        }
+        else if (phase == 0.5) {
+          return "full moon";
+        }
+        else if (phase < 0.75) {
+          return "waning gibbous";
+        }
+        else if (phase == 0.75) {
+          return "last quarter";
+        }
+        else {
+          return "waning crescent";
+        }
+      }
     }
   }
-  
+
   /**
    * Checks if the data is fresh (no older than 1 hour)
    * @param {JSON} data Data object from sessionStorage
@@ -184,13 +237,13 @@ export default async function getData(searchTerm) {
     const date = new Date(data.epoch * 1000);
     return Date.now() - date.getTime() < 3600000;
   }
-  
+
   async function getLocation() {
     if (!navigator.geolocation) {
       console.error("Geolocation not supported");
       return null;
     }
-  
+
     try {
       const position = await new Promise(function (resolve, reject) {
         navigator.geolocation.getCurrentPosition(resolve, reject);
