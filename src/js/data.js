@@ -16,8 +16,8 @@ export default async function getData(searchTerm) {
   if (!data) {
     let coords = await getLocation();
     if (coords) {
-      // TODO: for user display, use a reverse geocoding API to get the city name
       data = await getWeather(coords);
+      data.city = await getAddress(coords) ?? coords;
     }
     // if they don't give location, default to London
     else {
@@ -253,6 +253,45 @@ export default async function getData(searchTerm) {
     } catch (error) {
       console.error("Error getting geolocation:", error);
       return null;
+    }
+  }
+
+  async function getAddress(coords) {
+    try {
+      const baseUrl = "https://revgeocode.search.hereapi.com/v1/revgeocode";
+      const apiKey = "bp976wBc5XRzwETd4Y_vXNP7jfVAe2vMOzVw_VXw0nc";
+      const response = await fetch(`${baseUrl}?at=${coords}&apiKey=${apiKey}`);
+      if (!response.ok) {
+        throw new Error(`Response not OK: ${response.status}`);
+      }
+      const data = await response.json();
+      if (!data) {
+        throw new Error("No data returned");
+      }
+      return parseAddress(data);
+    }
+    catch (error) {
+      console.error(error);
+      return null;
+    }
+
+    function parseAddress(data) {
+      if (!data) {
+        return null;
+      }
+
+      let city = data.items[0].address.city;
+      let country = data.items[0].address.countryName;
+      let state = data.items[0].address.state;
+      let address;
+
+      if (state === city || state === country) {
+        address = `${city}, ${country}`;
+      } else {
+        address = `${city}, ${state}, ${country}`;
+      }
+
+      return address;
     }
   }
 }
