@@ -1,12 +1,51 @@
 import "../css/styles.css";
 import getData from "./data.js";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMagnifyingGlass,
+  faCloudRain,
+  faSnowflake,
+  faCloudMeatball,
+  faCloudShowersHeavy,
+  faCloudBolt,
+  faDroplet,
+  faWind,
+  faGauge,
+  faDownLeftAndUpRightToCenter,
+  faSun,
+  faEye,
+  faMoon
+} from "@fortawesome/free-solid-svg-icons";
 
+library.add([
+  faMagnifyingGlass,
+  faCloudRain,
+  faSnowflake,
+  faCloudMeatball,
+  faCloudShowersHeavy,
+  faCloudBolt,
+  faDroplet,
+  faWind,
+  faGauge,
+  faDownLeftAndUpRightToCenter,
+  faSun,
+  faEye,
+  faMoon
+]);
+
+const searchIcon = icon(faMagnifyingGlass);
+const rainIcon = icon(faCloudRain);
+const snowIcon = icon(faCloudMeatball);
+const sleetIcon = icon(faCloudShowersHeavy);
+const thunderIcon = icon(faCloudBolt);
+const dropIcon = icon(faDroplet);
+const windIcon = icon(faWind);
+const pressureIcon = icon(faDownLeftAndUpRightToCenter);
+const sunIcon = icon(faSun);
+const eyeIcon = icon(faEye);
+const moonIcon = icon(faMoon);
 
 document.addEventListener("DOMContentLoaded", async () => {
-  library.add(faMagnifyingGlass);
-  const searchIcon = icon(faMagnifyingGlass);
   let data = await getData();
   populateInfo(data);
   document.getElementById("search-button").addEventListener("click", search);
@@ -16,8 +55,37 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
   document.getElementById("search-button").appendChild(searchIcon.node[0]);
+  document.querySelectorAll(".precipitation-icon").forEach((element) => {
+    element.appendChild(rainIcon.node[0]);
+  });
+  document.querySelectorAll(".humidity-icon").forEach((element) => {
+    element.appendChild(dropIcon.node[0]);
+  });
+  document.querySelectorAll(".wind-icon").forEach((element) => {
+    element.appendChild(windIcon.node[0]);
+  });
+  document.querySelectorAll(".pressure-icon").forEach((element) => {
+    element.appendChild(pressureIcon.node[0]);
+  });
+  document.querySelectorAll(".dew-icon").forEach((element) => {
+    element.appendChild(dropIcon.node[0]);
+  });
+  document.querySelectorAll(".uv-icon").forEach((element) => {
+    element.appendChild(sunIcon.node[0]);
+  });
+  document.querySelectorAll(".visibility-icon").forEach((element) => {
+    element.appendChild(eyeIcon.node[0]);
+  });
+  document.querySelectorAll(".moon-icon").forEach((element) => {
+    element.appendChild(moonIcon.node[0]);
+  });
+  document.querySelectorAll(".sunrise-icon").forEach((element) => {
+    element.appendChild(sunIcon.node[0]);
+  });
+  document.querySelectorAll(".sunset-icon").forEach((element) => {
+    element.appendChild(sunIcon.node[0]);
+  });
 });
-
 
 function populateInfo(data) {
   populateWeekInfo(data);
@@ -34,7 +102,8 @@ function populateCurrentInfo(data) {
   document.getElementById("desc").textContent = data.description;
   document.querySelector("body").style.backgroundImage =
     `url(${data.backgroundSrc.src})`;
-  document.getElementById("img-attr-name").textContent = data.backgroundSrc.nameText;
+  document.getElementById("img-attr-name").textContent =
+    data.backgroundSrc.nameText;
   document.getElementById("img-attr-name").href = data.backgroundSrc.nameLink;
   document.getElementById("img-attr-src").href = data.backgroundSrc.srcLink;
   document.getElementById("current-feels").textContent = data.feelsLike;
@@ -48,8 +117,6 @@ function populateCurrentInfo(data) {
 function populateDetails(data) {
   document.getElementById("precipitation").textContent =
     data.precipitationProbability;
-  document.getElementById("precipitation-type").textContent =
-    data.precipitationTypeString;
   document.getElementById("humidity").textContent = data.humidity;
   document.getElementById("wind-speed").textContent = data.windSpeed;
   document.getElementById("wind-direction").textContent =
@@ -73,7 +140,8 @@ function populateWeekInfo(data) {
     document.getElementById(`day-${i}-icon`).alt = day.iconSrc.alt;
     document.getElementById(`day-${i}-high`).textContent = day.high;
     document.getElementById(`day-${i}-low`).textContent = day.low;
-    document.getElementById(`day-${i}-conditions`).textContent = day.conditions;
+    document.getElementById(`day-${i}-precipitation`).textContent =
+      day.precipitationProbability;
   }
 }
 
@@ -91,8 +159,8 @@ function populateHourlyInfo(data) {
     document.getElementById(`hour-${i}-icon`).src = hour.iconSrc.src;
     document.getElementById(`hour-${i}-icon`).alt = hour.iconSrc.alt;
     document.getElementById(`hour-${i}-temp`).textContent = hour.feelsLike;
-    document.getElementById(`hour-${i}-conditions`).textContent =
-      hour.conditions;
+    document.getElementById(`hour-${i}-precipitation`).textContent =
+      hour.precipitationProbability;
 
     hourIndex++;
   }
