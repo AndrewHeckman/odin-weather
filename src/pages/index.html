@@ -23,12 +23,17 @@
           />
           <button id="search-button"></button>
         </div>
+        <div id="unit-selector" class="grid">
+          <button id="f-button" class="unit-button selected">&deg;F</button>
+          <button id="c-button" class="unit-button">&deg;C</button>
+          <button id="h-button" class="unit-button">Hybrid</button>
+        </div>
+      </div>
+      <div id="header-bottom">
         <h3 id="location-info" class="hidden">
           <span id="location">Location</span>,
           as of <span id="date">time</span>.
         </h3>
-      </div>
-      <div id="header-bottom">
         <p id="desc" class="hidden"></p>
         <h1 id="loading">Loading</h1>
       </div>
@@ -238,7 +243,6 @@
         </p>
         <p class="detail-value">
           <span id="wind-speed"></span>
-          <span>mph</span>
           <span id="wind-direction"></span>
         </p>
         <p class="detail-name">
@@ -247,7 +251,6 @@
         </p>
         <p class="detail-value">
           <span id="pressure"></span>
-          <span>mb</span>
         </p>
         <p class="detail-name">
           <span class="dew-icon small-icon"></span>
@@ -268,7 +271,6 @@
         </p>
         <p class="detail-value">
           <span id="visibility"></span>
-          <span>mi</span>
         </p>
         <p class="detail-name">
           <span class="moon-icon small-icon"></span>

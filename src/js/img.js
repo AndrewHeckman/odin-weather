@@ -76,44 +76,58 @@ const backgrounds = {
   cloudy: {
     src: cloudyBackground,
     nameText: "Alex Plesovskich",
-    nameLink: "https://unsplash.com/@aples?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: "https://unsplash.com/photos/photograph-of-gray-clouds-tJzAUeNygwA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@aples?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      "https://unsplash.com/photos/photograph-of-gray-clouds-tJzAUeNygwA?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
   fog: {
     src: fogBackground,
     nameText: "Paul Pastourmatzis",
-    nameLink: "https://unsplash.com/@pueblovista?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: "https://unsplash.com/photos/silhouette-of-trees-covered-by-fog-KT3WlrL_bsg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@pueblovista?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      "https://unsplash.com/photos/silhouette-of-trees-covered-by-fog-KT3WlrL_bsg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
   "partly-cloudy-day": {
     src: partlyCloudyDayBackground,
     nameText: "Engin Akyurt",
-    nameLink: "https://unsplash.com/@enginakyurt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: "https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-OelZIyyRKZw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@enginakyurt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      "https://unsplash.com/photos/white-clouds-and-blue-sky-during-daytime-OelZIyyRKZw?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
   "partly-cloudy-night": {
     src: partlyCloudyNightBackground,
     nameText: "Billy Huynh",
-    nameLink: "https://unsplash.com/@billy_huy?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: "https://unsplash.com/photos/full-moon-hiding-on-a-cloud-cycMgDyN5ko?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@billy_huy?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      "https://unsplash.com/photos/full-moon-hiding-on-a-cloud-cycMgDyN5ko?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
   rain: {
     src: rainBackground,
     nameText: "Noah Silliman",
-    nameLink: "https://unsplash.com/@noahsilliman?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: "https://unsplash.com/photos/water-drops-on-glass-i2J9jnvaAbU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@noahsilliman?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      "https://unsplash.com/photos/water-drops-on-glass-i2J9jnvaAbU?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
   snow: {
     src: snowBackground,
     nameText: "Jasmin Schuler",
-    nameLink: "https://unsplash.com/@jasmint?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: "https://unsplash.com/photos/time-lapse-photo-of-snow-7YU8sX2Vup0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@jasmint?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      "https://unsplash.com/photos/time-lapse-photo-of-snow-7YU8sX2Vup0?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
   wind: {
     src: windBackground,
     nameText: "Jason Mavrommatis",
-    nameLink: "https://unsplash.com/@jeisblack?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
-    srcLink: " https://unsplash.com/photos/wind-turbines-on-snowy-mountain-under-clear-blue-sky-during-daytime-nyL-rzwP-Mk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    nameLink:
+      "https://unsplash.com/@jeisblack?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+    srcLink:
+      " https://unsplash.com/photos/wind-turbines-on-snowy-mountain-under-clear-blue-sky-during-daytime-nyL-rzwP-Mk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
 };
 

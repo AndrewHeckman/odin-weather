@@ -17,7 +17,7 @@ export default async function getData(searchTerm) {
     let coords = await getLocation();
     if (coords) {
       data = await getWeather(coords);
-      data.city = await getAddress(coords) ?? coords;
+      data.city = (await getAddress(coords)) ?? coords;
     }
     // if they don't give location, default to London
     else {
@@ -182,17 +182,13 @@ export default async function getData(searchTerm) {
 
         if (time.substring(0, 2) > 12) {
           time = `${time.substring(0, 2) - 12}${time.substring(2)} PM`;
-        }
-        else if (time.substring(0, 2) === "12") {
-          time += "PM";
-        }
-        else if (time.substring(0, 2) === "00") {
+        } else if (time.substring(0, 2) === "12") {
+          time += " PM";
+        } else if (time.substring(0, 2) === "00") {
           time = `12${time.substring(2)} AM`;
-        }
-        else if (time.substring(0, 1) === "0") {
+        } else if (time.substring(0, 1) === "0") {
           time = `${time.substring(1)} AM`;
-        }
-        else {
+        } else {
           time = `${time} AM`;
         }
 
@@ -202,26 +198,19 @@ export default async function getData(searchTerm) {
       function formatMoonPhase(phase) {
         if (phase == 0) {
           return "new moon";
-        }
-        else if (phase < 0.25) {
+        } else if (phase < 0.25) {
           return "waxing crescent";
-        }
-        else if (phase == 0.25) {
+        } else if (phase == 0.25) {
           return "first quarter";
-        }
-        else if (phase < 0.5) {
+        } else if (phase < 0.5) {
           return "waxing gibbous";
-        }
-        else if (phase == 0.5) {
+        } else if (phase == 0.5) {
           return "full moon";
-        }
-        else if (phase < 0.75) {
+        } else if (phase < 0.75) {
           return "waning gibbous";
-        }
-        else if (phase == 0.75) {
+        } else if (phase == 0.75) {
           return "last quarter";
-        }
-        else {
+        } else {
           return "waning crescent";
         }
       }
@@ -269,8 +258,7 @@ export default async function getData(searchTerm) {
         throw new Error("No data returned");
       }
       return parseAddress(data);
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error);
       return null;
     }
