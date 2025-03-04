@@ -35,9 +35,8 @@ library.add([
 
 const searchIcon = icon(faMagnifyingGlass);
 const rainIcon = icon(faCloudRain);
-const snowIcon = icon(faCloudMeatball);
+const snowIcon = icon(faSnowflake);
 const sleetIcon = icon(faCloudShowersHeavy);
-const thunderIcon = icon(faCloudBolt);
 const dropIcon = icon(faDroplet);
 const windIcon = icon(faWind);
 const pressureIcon = icon(faDownLeftAndUpRightToCenter);
@@ -48,16 +47,7 @@ const moonIcon = icon(faMoon);
 document.addEventListener("DOMContentLoaded", async () => {
   let data = await getData();
   populateInfo(data);
-  document.getElementById("search-button").addEventListener("click", search);
-  document.getElementById("search-input").addEventListener("keyup", (event) => {
-    if (event.key === "Enter") {
-      search();
-    }
-  });
   document.getElementById("search-button").appendChild(searchIcon.node[0]);
-  document.querySelectorAll(".precipitation-icon").forEach((element) => {
-    element.appendChild(rainIcon.node[0]);
-  });
   document.querySelectorAll(".humidity-icon").forEach((element) => {
     element.appendChild(dropIcon.node[0]);
   });
@@ -85,6 +75,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelectorAll(".sunset-icon").forEach((element) => {
     element.appendChild(sunIcon.node[0]);
   });
+  document.getElementById("search-button").addEventListener("click", search);
+  document.getElementById("search-input").addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      search();
+    }
+  });
 });
 
 function populateInfo(data) {
@@ -92,8 +88,47 @@ function populateInfo(data) {
   populateCurrentInfo(data);
   populateDetails(data);
   populateHourlyInfo(data);
-
+  document.querySelectorAll(".rain-icon").forEach((element) => {
+    element.replaceChildren(rainIcon.node[0]);
+  });
+  document.querySelectorAll(".snow-icon").forEach((element) => {
+    element.replaceChildren(snowIcon.node[0]);
+  });
+  document.querySelectorAll(".sleet-icon").forEach((element) => {
+    element.replaceChildren(sleetIcon.node[0]);
+  });
   show();
+}
+
+function populateWeekInfo(data) {
+  for (let i = 1; i < 15; i++) {
+    let day = data.days[i];
+
+    document.getElementById(`day-${i}-date`).textContent =
+      day.dateTime.substring(5);
+    document.getElementById(`day-${i}-icon`).src = day.iconSrc.src;
+    document.getElementById(`day-${i}-icon`).alt = day.iconSrc.alt;
+    document.getElementById(`day-${i}-high`).textContent = day.high;
+    document.getElementById(`day-${i}-low`).textContent = day.low;
+    document.getElementById(`day-${i}-precipitation`).textContent =
+      day.precipitationProbability;
+
+    if (day.precipitationTypeString === "rain") {
+      document.getElementById(`day-${i}-precipitation-icon`).classList.remove("snow-icon");
+      document.getElementById(`day-${i}-precipitation-icon`).classList.remove("sleet-icon");
+      document.getElementById(`day-${i}-precipitation-icon`).classList.add("rain-icon");
+    }
+    else if (day.precipitationTypeString === "snow") {
+      document.getElementById(`day-${i}-precipitation-icon`).classList.remove("rain-icon");
+      document.getElementById(`day-${i}-precipitation-icon`).classList.remove("sleet-icon");
+      document.getElementById(`day-${i}-precipitation-icon`).classList.add("snow-icon");
+    }
+    else {
+      document.getElementById(`day-${i}-precipitation-icon`).classList.remove("rain-icon");
+      document.getElementById(`day-${i}-precipitation-icon`).classList.remove("snow-icon");
+      document.getElementById(`day-${i}-precipitation-icon`).classList.add("sleet-icon");
+    }
+  }
 }
 
 function populateCurrentInfo(data) {
@@ -128,20 +163,14 @@ function populateDetails(data) {
   document.getElementById("moon-phase").textContent = data.moonPhase;
   document.getElementById("sunrise").textContent = data.sunrise;
   document.getElementById("sunset").textContent = data.sunset;
-}
 
-function populateWeekInfo(data) {
-  for (let i = 1; i < 15; i++) {
-    let day = data.days[i];
-
-    document.getElementById(`day-${i}-date`).textContent =
-      day.dateTime.substring(5);
-    document.getElementById(`day-${i}-icon`).src = day.iconSrc.src;
-    document.getElementById(`day-${i}-icon`).alt = day.iconSrc.alt;
-    document.getElementById(`day-${i}-high`).textContent = day.high;
-    document.getElementById(`day-${i}-low`).textContent = day.low;
-    document.getElementById(`day-${i}-precipitation`).textContent =
-      day.precipitationProbability;
+  if (data.precipitationTypeString === "snow") {
+    document.getElementById("details-precipitation-icon").classList.remove("rain-icon");
+    document.getElementById("precipitation-icon").classList.add("snow-icon");
+  }
+  else if (data.precipitationTypeString != "rain") {
+    document.getElementById("details-precipitation-icon").classList.remove("rain-icon");
+    document.getElementById("precipitation-icon").classList.add("sleet-icon");
   }
 }
 
@@ -161,6 +190,22 @@ function populateHourlyInfo(data) {
     document.getElementById(`hour-${i}-temp`).textContent = hour.feelsLike;
     document.getElementById(`hour-${i}-precipitation`).textContent =
       hour.precipitationProbability;
+
+    if (hour.precipitationTypeString === "rain") {
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.remove("snow-icon");
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.remove("sleet-icon");
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.add("rain-icon");
+    }
+    else if (hour.precipitationTypeString === "snow") {
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.remove("rain-icon");
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.remove("sleet-icon");
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.add("snow-icon");
+    }
+    else {
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.remove("rain-icon");
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.remove("snow-icon");
+      document.getElementById(`hour-${i}-precipitation-icon`).classList.add("sleet-icon");
+    }
 
     hourIndex++;
   }
