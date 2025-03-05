@@ -55,7 +55,6 @@ export default async function getData(searchTerm) {
       return {
         city: data.resolvedAddress,
         epoch: data.currentConditions.datetimeEpoch,
-        cloudCover: data.currentConditions.cloudcover,
         conditions: data.currentConditions.conditions,
         dateTime: data.currentConditions.datetime,
         dateTimeString: formatTime(data.currentConditions.datetime) + " " + formatOffset(data.tzoffset),
@@ -65,29 +64,21 @@ export default async function getData(searchTerm) {
         high: data.days[0].tempmax,
         low: data.days[0].tempmin,
         humidity: data.currentConditions.humidity,
-        icon: data.currentConditions.icon,
         iconSrc: getIconSrc(data.currentConditions.icon),
         backgroundSrc: getBackgroundSrc(data.currentConditions.icon),
         moonPhase: formatMoonPhase(data.currentConditions.moonphase),
-        precipitation: data.currentConditions.precip,
         precipitationProbability: data.currentConditions.precipprob,
-        precipitationType: data.currentConditions.preciptype,
         precipitationTypeString: formatPrecipitationType(
           data.currentConditions.preciptype,
         ),
         pressure: data.currentConditions.pressure,
-        snow: data.currentConditions.snow,
-        snowDepth: data.currentConditions.snowdepth,
         sunrise: formatTime(data.currentConditions.sunrise),
         sunset: formatTime(data.currentConditions.sunset),
-        temperature: data.currentConditions.temp,
         uvIndex: data.currentConditions.uvindex,
         visibility: data.currentConditions.visibility,
-        windDirection: data.currentConditions.winddir,
         windDirectionString: formatWindDirection(
           data.currentConditions.winddir,
         ),
-        windGust: data.currentConditions.windgust,
         windSpeed: data.currentConditions.windspeed,
         days: data.days.map(parseDay),
       };
@@ -95,33 +86,11 @@ export default async function getData(searchTerm) {
       function parseDay(day) {
         return {
           dateTime: day.datetime,
-          cloudCover: day.cloudcover,
-          conditions: day.conditions,
-          description: day.description,
-          dewPoint: day.dew,
-          humidity: day.humidity,
-          icon: day.icon,
           iconSrc: getIconSrc(day.icon),
-          moonPhase: formatMoonPhase(day.moonphase),
-          precipitation: day.precip,
-          precipitationCover: day.precipcover,
           precipitationProbability: day.precipprob,
-          precipitationType: day.preciptype,
           precipitationTypeString: formatPrecipitationType(day.preciptype),
-          pressure: day.pressure,
-          severeRisk: day.severerisk,
-          snow: day.snow,
-          snowDepth: day.snowdepth,
-          sunrise: day.sunrise,
-          sunset: day.sunset,
           high: day.tempmax,
           low: day.tempmin,
-          uvIndex: day.uvindex,
-          visibility: day.visibility,
-          windDirection: day.winddir,
-          windDirectionString: formatWindDirection(day.winddir),
-          windGust: day.windgust,
-          windSpeed: day.windspeed,
           hours: day.hours.map(parseHour),
         };
 
@@ -129,28 +98,10 @@ export default async function getData(searchTerm) {
           return {
             dateTime: hour.datetime,
             dateTimeString: formatTime(hour.datetime),
-            cloudCover: hour.cloudcover,
-            conditions: hour.conditions,
-            dewPoint: hour.dew,
             feelsLike: hour.feelslike,
-            humidity: hour.humidity,
-            icon: hour.icon,
             iconSrc: getIconSrc(hour.icon),
-            precipitation: hour.precip,
             precipitationProbability: hour.precipprob,
-            precipitationType: hour.preciptype,
             precipitationTypeString: formatPrecipitationType(hour.preciptype),
-            pressure: hour.pressure,
-            severeRisk: hour.severerisk,
-            snow: hour.snow,
-            snowDepth: hour.snowdepth,
-            temperature: hour.temp,
-            uvIndex: hour.uvindex,
-            visibility: hour.visibility,
-            windDirection: hour.winddir,
-            windDirectionString: formatWindDirection(hour.winddir),
-            windGust: hour.windgust,
-            windSpeed: hour.windspeed,
           };
         }
       }
@@ -207,7 +158,7 @@ export default async function getData(searchTerm) {
         if (minutes < 10) {
           minutes = `0${minutes}`;
         }
-        
+
         return `UTC${sign}${hours}:${minutes}`;
       }
 
