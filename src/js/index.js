@@ -126,30 +126,21 @@ function populateWeekInfo(data) {
     if (day.precipitationTypeString === "rain") {
       document
         .getElementById(`day-${i}-precipitation-icon`)
-        .classList.remove("snow-icon");
-      document
-        .getElementById(`day-${i}-precipitation-icon`)
-        .classList.remove("sleet-icon");
+        .classList.remove("snow-icon", "sleet-icon");
       document
         .getElementById(`day-${i}-precipitation-icon`)
         .classList.add("rain-icon");
     } else if (day.precipitationTypeString === "snow") {
       document
         .getElementById(`day-${i}-precipitation-icon`)
-        .classList.remove("rain-icon");
-      document
-        .getElementById(`day-${i}-precipitation-icon`)
-        .classList.remove("sleet-icon");
+        .classList.remove("rain-icon", "sleet-icon");
       document
         .getElementById(`day-${i}-precipitation-icon`)
         .classList.add("snow-icon");
     } else {
       document
         .getElementById(`day-${i}-precipitation-icon`)
-        .classList.remove("rain-icon");
-      document
-        .getElementById(`day-${i}-precipitation-icon`)
-        .classList.remove("snow-icon");
+        .classList.remove("rain-icon", "snow-icon");
       document
         .getElementById(`day-${i}-precipitation-icon`)
         .classList.add("sleet-icon");
@@ -211,16 +202,22 @@ function populateDetails(data) {
     document.getElementById("visibility").textContent = data.visibility + " mi";
   }
 
-  if (data.precipitationTypeString === "snow") {
+  if (data.precipitationTypeString === "rain") {
     document
       .getElementById("details-precipitation-icon")
-      .classList.remove("rain-icon");
-    document.getElementById("precipitation-icon").classList.add("snow-icon");
-  } else if (data.precipitationTypeString != "rain") {
+      .classList.remove("snow-icon", "sleet-icon");
+    document.getElementById("details-precipitation-icon").classList.add("rain-icon");
+  }
+  else if (data.precipitationTypeString === "snow") {
     document
       .getElementById("details-precipitation-icon")
-      .classList.remove("rain-icon");
-    document.getElementById("precipitation-icon").classList.add("sleet-icon");
+      .classList.remove("rain-icon", "sleet-icon");
+    document.getElementById("details-precipitation-icon").classList.add("snow-icon");
+  } else {
+    document
+      .getElementById("details-precipitation-icon")
+      .classList.remove("rain-icon", "snow-icon");
+    document.getElementById("details-precipitation-icon").classList.add("sleet-icon");
   }
 }
 
@@ -250,30 +247,21 @@ function populateHourlyInfo(data) {
     if (hour.precipitationTypeString === "rain") {
       document
         .getElementById(`hour-${i}-precipitation-icon`)
-        .classList.remove("snow-icon");
-      document
-        .getElementById(`hour-${i}-precipitation-icon`)
-        .classList.remove("sleet-icon");
+        .classList.remove("snow-icon", "sleet-icon");
       document
         .getElementById(`hour-${i}-precipitation-icon`)
         .classList.add("rain-icon");
     } else if (hour.precipitationTypeString === "snow") {
       document
         .getElementById(`hour-${i}-precipitation-icon`)
-        .classList.remove("rain-icon");
-      document
-        .getElementById(`hour-${i}-precipitation-icon`)
-        .classList.remove("sleet-icon");
+        .classList.remove("rain-icon", "sleet-icon");
       document
         .getElementById(`hour-${i}-precipitation-icon`)
         .classList.add("snow-icon");
     } else {
       document
         .getElementById(`hour-${i}-precipitation-icon`)
-        .classList.remove("rain-icon");
-      document
-        .getElementById(`hour-${i}-precipitation-icon`)
-        .classList.remove("snow-icon");
+        .classList.remove("rain-icon", "snow-icon");
       document
         .getElementById(`hour-${i}-precipitation-icon`)
         .classList.add("sleet-icon");
