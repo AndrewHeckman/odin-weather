@@ -58,7 +58,7 @@ export default async function getData(searchTerm) {
         cloudCover: data.currentConditions.cloudcover,
         conditions: data.currentConditions.conditions,
         dateTime: data.currentConditions.datetime,
-        dateTimeString: formatTime(data.currentConditions.datetime),
+        dateTimeString: formatTime(data.currentConditions.datetime) + " " + formatOffset(data.tzoffset),
         description: data.description,
         dewPoint: data.currentConditions.dew,
         feelsLike: data.currentConditions.feelslike,
@@ -193,6 +193,22 @@ export default async function getData(searchTerm) {
         }
 
         return time;
+      }
+
+      function formatOffset(offset) {
+        let sign = offset < 0 ? "-" : "+";
+        offset = Math.abs(offset);
+        let hours = Math.floor(offset);
+        let minutes = Math.round((offset - hours) * 60);
+
+        if (hours < 10) {
+          hours = `0${hours}`;
+        }
+        if (minutes < 10) {
+          minutes = `0${minutes}`;
+        }
+        
+        return `UTC${sign}${hours}:${minutes}`;
       }
 
       function formatMoonPhase(phase) {
