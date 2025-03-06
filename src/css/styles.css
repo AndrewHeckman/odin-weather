@@ -66,6 +66,20 @@ header {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
+#logo {
+  height: 3rem;
+  aspect-ratio: 1/1;
+}
+
+#app-name {
+  display: inline-block;
+  height: 3rem;
+  line-height: 3rem;
+  vertical-align: top;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+}
+
 #search {
   margin: auto;
 }
@@ -107,7 +121,7 @@ button:hover {
 
 #unit-selector {
   grid-template-columns: 1fr 1fr 1fr;
-  margin-left: auto;
+  margin: auto 0 auto auto;
   gap: 0.25rem;
 }
 
@@ -172,6 +186,12 @@ button:hover {
 .day > *,
 .hour > * {
   margin: auto 0;
+}
+
+.day > p,
+.hour > p,
+#details > p {
+  font-size: 1.25rem;
 }
 
 .day:not(:first-child) {
