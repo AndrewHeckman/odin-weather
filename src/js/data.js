@@ -1,35 +1,52 @@
 import { getIconSrc, getBackgroundSrc } from "./img";
 
 export default async function getData(searchTerm) {
+  // if they search for a city, try to find it
   if (searchTerm) {
     let data = await getWeather(searchTerm);
     if (data) {
       sessionStorage.setItem("data", JSON.stringify(data));
       return data;
     } else {
-      alert("City not found");
+      return null;
     }
   }
 
+  // if they did not search for a city, try to get data from session storage
   let data = JSON.parse(sessionStorage.getItem("data"));
-
-  if (!data) {
-    let coords = await getLocation();
-    if (coords) {
-      data = await getWeather(coords);
-      data.city = (await getAddress(coords)) ?? coords;
+  if (data && freshData(data)) {
+    // if data is no older than 1 hour, return it
+    return data;
+  } else if (data && !freshData(data)) {
+    // if data is older than 1 hour, try to get fresh data
+    let newData = await getWeather(data.city);
+    if (newData) {
+      sessionStorage.setItem("data", JSON.stringify(newData));
+      return newData;
     }
-    // if they don't give location, default to London
-    else {
-      data = await getWeather("London");
-    }
-    sessionStorage.setItem("data", JSON.stringify(data));
-  } else if (!freshData(data)) {
-    data = await getWeather(data.city);
-    sessionStorage.setItem("data", JSON.stringify(data));
+    // if we can't get fresh data, return the old data
+    return data;
   }
 
-  return data;
+  // if there is no data in session storage, try to get their location
+  let coords = await getLocation();
+  if (coords) {
+    data = await getWeather(coords);
+    if (data) {
+      data.city = (await getAddress(coords)) ?? coords;
+      sessionStorage.setItem("data", JSON.stringify(data));
+      return data;
+    }
+  }
+
+  // if they don't give location, default to London
+  data = await getWeather("London");
+  if (data) {
+    sessionStorage.setItem("data", JSON.stringify(data));
+    return data;
+  }
+
+  return null;
 
   async function getWeather(city) {
     try {
@@ -57,7 +74,10 @@ export default async function getData(searchTerm) {
         epoch: data.currentConditions.datetimeEpoch,
         conditions: data.currentConditions.conditions,
         dateTime: data.currentConditions.datetime,
-        dateTimeString: formatTime(data.currentConditions.datetime) + " " + formatOffset(data.tzoffset),
+        dateTimeString:
+          formatTime(data.currentConditions.datetime) +
+          " " +
+          formatOffset(data.tzoffset),
         description: data.description,
         dewPoint: data.currentConditions.dew,
         feelsLike: data.currentConditions.feelslike,

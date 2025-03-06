@@ -48,7 +48,6 @@ let units = "f";
 
 document.addEventListener("DOMContentLoaded", async () => {
   let data = await getData();
-  populateInfo(data);
   document.getElementById("search-button").appendChild(searchIcon.node[0]);
   document.querySelectorAll(".humidity-icon").forEach((element) => {
     element.appendChild(dropIcon.node[0]);
@@ -86,6 +85,12 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelectorAll(".unit-button").forEach((element) => {
     element.addEventListener("click", unitSwitch);
   });
+
+  if (data) {
+    populateInfo(data);
+  } else {
+    showError("Error loading data. Please try again later.");
+  }
 });
 
 function populateInfo(data) {
@@ -102,7 +107,7 @@ function populateInfo(data) {
   document.querySelectorAll(".sleet-icon").forEach((element) => {
     element.replaceChildren(sleetIcon.node[0]);
   });
-  show();
+  showHome();
 }
 
 function populateWeekInfo(data) {
@@ -271,14 +276,14 @@ function populateHourlyInfo(data) {
   }
 }
 
-function hide() {
-  document.getElementById("location-info").classList.add("hidden");
-  document.getElementById("home").classList.add("hidden");
-  document.getElementById("img-attr").classList.add("hidden");
+function showLoading() {
+  // document.getElementById("location-info").classList.add("hidden");
+  // document.getElementById("home").classList.add("hidden");
+  // document.getElementById("img-attr").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
 }
 
-function show() {
+function showHome() {
   document.getElementById("loading").classList.add("hidden");
   document.getElementById("location-info").classList.remove("hidden");
   document.getElementById("desc").classList.remove("hidden");
@@ -287,11 +292,17 @@ function show() {
 }
 
 async function search() {
-  hide();
+  hideError();
   const search = document.getElementById("search-input").value;
   document.getElementById("search-input").value = "";
+  showLoading();
   let data = await getData(search);
-  populateInfo(data);
+  if (data) {
+    populateInfo(data);
+  } else {
+    showError("Location not found. Please try again.");
+    showHome();
+  }
 }
 
 function unitSwitch(event) {
@@ -330,6 +341,16 @@ function unitSwitch(event) {
 
   let data = JSON.parse(sessionStorage.getItem("data"));
   populateInfo(data);
+}
+
+function showError(error) {
+  document.getElementById("error").textContent = error;
+  document.getElementById("error").classList.remove("hidden");
+}
+
+function hideError() {
+  document.getElementById("error").classList.add("hidden");
+  document.getElementById("error").textContent = "";
 }
 
 function fToC(f) {
