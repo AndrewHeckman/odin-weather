@@ -127,7 +127,7 @@ const backgrounds = {
     nameLink:
       "https://unsplash.com/@jeisblack?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
     srcLink:
-      " https://unsplash.com/photos/wind-turbines-on-snowy-mountain-under-clear-blue-sky-during-daytime-nyL-rzwP-Mk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
+      "https://unsplash.com/photos/wind-turbines-on-snowy-mountain-under-clear-blue-sky-during-daytime-nyL-rzwP-Mk?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash",
   },
 };
 

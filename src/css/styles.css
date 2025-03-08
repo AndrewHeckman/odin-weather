@@ -299,10 +299,15 @@ button:hover {
 footer {
   padding: 1rem;
   background-color: var(--translucent-black2);
-  text-align: center;
+  /* text-align: center; */
   color: white;
 }
 
 footer a {
   color: inherit;
+}
+
+footer p {
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
