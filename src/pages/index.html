@@ -25,7 +25,10 @@
             placeholder="Location"
             autocomplete="off"
           />
-          <button id="search-button"></button>
+          <button id="search-button">
+            <span id="search-icon" class="hidden"></span>
+            <span id="refresh-icon"></span>
+          </button>
         </div>
         <div id="unit-selector" class="grid">
           <button id="f-button" class="unit-button selected">&deg;F</button>
@@ -34,9 +37,9 @@
         </div>
       </div>
       <div id="header-bottom">
-        <h3 id="location-info" class="hidden">
-          <span id="location">Location</span>,
-          as of <span id="date">time</span>.
+        <h3 id="info" class="hidden">
+          <span id="location-info"></span>,
+          as of <span id="date-info"></span>.
         </h3>
         <p id="desc" class="hidden"></p>
         <p id="loading">Loading</p>
@@ -45,172 +48,174 @@
     </header>
     <main id="home" class="grid hidden" >
       <div id="week" class="flex flex-column">
-        <div id="day-1" class="day grid">
-          <p id="day-1-date"></p>
+        <div id="day-1" class="day flex">
+          <p id="day-1-date" class="day-date"></p>
           <img id="day-1-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-1-high"></span>&deg;</p>
             <p>Low: <span id="day-1-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-1-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-1-precipitation"></span>%
+            <span class="precipitation-width">
+              <span id="day-1-precipitation"></span>%
+          </span>
           </p>
         </div>
-        <div id="day-2" class="day grid">
+        <div id="day-2" class="day flex">
           <p id="day-2-date"></p>
           <img id="day-2-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-2-high"></span>&deg;</p>
             <p>Low: <span id="day-2-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-2-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-2-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-2-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-3" class="day grid">
+        <div id="day-3" class="day flex">
           <p id="day-3-date"></p>
           <img id="day-3-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-3-high"></span>&deg;</p>
             <p>Low: <span id="day-3-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-3-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-3-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-3-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-4" class="day grid">
+        <div id="day-4" class="day flex">
           <p id="day-4-date"></p>
           <img id="day-4-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-4-high"></span>&deg;</p>
             <p>Low: <span id="day-4-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-4-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-4-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-4-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-5" class="day grid">
+        <div id="day-5" class="day flex">
           <p id="day-5-date"></p>
           <img id="day-5-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-5-high"></span>&deg;</p>
             <p>Low: <span id="day-5-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-5-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-5-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-5-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-6" class="day grid">
+        <div id="day-6" class="day flex">
           <p id="day-6-date"></p>
           <img id="day-6-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-6-high"></span>&deg;</p>
             <p>Low: <span id="day-6-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-6-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-6-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-6-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-7" class="day grid">
+        <div id="day-7" class="day flex">
           <p id="day-7-date"></p>
           <img id="day-7-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-7-high"></span>&deg;</p>
             <p>Low: <span id="day-7-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-7-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-7-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-7-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-8" class="day grid">
+        <div id="day-8" class="day flex">
           <p id="day-8-date"></p>
           <img id="day-8-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-8-high"></span>&deg;</p>
             <p>Low: <span id="day-8-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-8-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-8-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-8-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-9" class="day grid">
+        <div id="day-9" class="day flex">
           <p id="day-9-date"></p>
           <img id="day-9-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-9-high"></span>&deg;</p>
             <p>Low: <span id="day-9-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-9-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-9-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-9-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-10" class="day grid">
+        <div id="day-10" class="day flex">
           <p id="day-10-date"></p>
           <img id="day-10-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-10-high"></span>&deg;</p>
             <p>Low: <span id="day-10-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-10-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-10-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-10-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-11" class="day grid">
+        <div id="day-11" class="day flex">
           <p id="day-11-date"></p>
           <img id="day-11-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-11-high"></span>&deg;</p>
             <p>Low: <span id="day-11-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-11-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-11-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-11-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-12" class="day grid">
+        <div id="day-12" class="day flex">
           <p id="day-12-date"></p>
           <img id="day-12-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-12-high"></span>&deg;</p>
             <p>Low: <span id="day-12-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-12-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-12-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-12-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-13" class="day grid">
+        <div id="day-13" class="day flex">
           <p id="day-13-date"></p>
           <img id="day-13-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-13-high"></span>&deg;</p>
             <p>Low: <span id="day-13-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-13-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-13-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-13-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="day-14" class="day grid">
+        <div id="day-14" class="day flex">
           <p id="day-14-date"></p>
           <img id="day-14-icon" class="medium-icon"/>
-          <div>
+          <div class="day-temps">
             <p>High: <span id="day-14-high"></span>&deg;</p>
             <p>Low: <span id="day-14-low"></span>&deg;</p>
           </div>
           <p>
             <span id="day-14-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="day-14-precipitation"></span>%
+            <span class="precipitation-width"><span id="day-14-precipitation"></span>%</span>
           </p>
         </div>
       </div>
@@ -226,186 +231,206 @@
         <img id="current-icon" />
       </div>
       <div id="details" class="grid">
-        <p class="detail-name">
-          <span id="details-precipitation-icon" class="rain-icon small-icon"></span>
-          <span>Precipitation:</span>
+        <!-- precipitation -->
+        <p class="detail flex">
+          <span class="detail-left">
+            <span id="details-precipitation-icon" class="rain-icon detail-icon"></span>
+            <span>Precipitation:</span>
+          </span>
+          <span class="detail-right">
+            <span id="precipitation"></span>%
+          </span>
         </p>
-        <p class="detail-value">
-          <span id="precipitation"></span>
-          <span>%</span>
+        <!-- humidity -->
+        <p class="detail flex">
+          <span class="detail-left">
+            <span class="humidity-icon detail-icon"></span>
+            <span>Humidity:</span>
+          </span>
+          <span class="detail-right">
+            <span id="humidity"></span>%
+          </span>
         </p>
-        <p class="detail-name">
-          <span class="humidity-icon small-icon"></span>
-          <span>Humidity:</span>
+        <!-- wind -->
+        <p class="detail flex">
+          <span class="detail-left">
+            <span class="wind-icon detail-icon"></span>
+            <span>Wind:</span>
+          </span>
+          <span class="detail-right">
+            <span id="wind-speed"></span>&nbsp;
+            <span id="wind-direction"></span>
+          </span>
         </p>
-        <p class="detail-value">
-          <span id="humidity"></span>
-          <span>%</span>
-        </p>
-        <p class="detail-name">
-          <span class="wind-icon small-icon"></span>
-          <span>Wind:</span>
-        </p>
-        <p class="detail-value">
-          <span id="wind-speed"></span>
-          <span id="wind-direction"></span>
-        </p>
-        <p class="detail-name">
-          <span class="pressure-icon small-icon"></span>
-          <span>Pressure:</span>
-        </p>
-        <p class="detail-value">
+        <!-- pressure -->
+        <p class="detail flex">
+          <span>
+            <span class="pressure-icon detail-icon"></span>
+            <span>Pressure:</span>
+          </span>
           <span id="pressure"></span>
         </p>
-        <p class="detail-name">
-          <span class="dew-icon small-icon"></span>
-          <span>Dew point:</span>
+        <!-- dew point -->
+        <p class="detail flex">
+          <span>
+            <span class="dew-icon detail-icon"></span>
+            <span>Dew point:</span>
+          </span>
+          <span>
+            <span id="dew-point"></span>&deg;
+          </span>
         </p>
-        <p class="detail-value"><span id="dew-point"></span>&deg;</p>
-        <p class="detail-name">
-          <span class="uv-icon small-icon"></span>
-          <span>UV Index:</span>
+        <!-- UV index -->
+        <p class="detail flex">
+          <span>
+            <span class="uv-icon detail-icon"></span>
+            <span>UV Index:</span>
+          </span>
+          <span>
+            <span id="uv-index"></span>
+            <span>out of 10</span>
+          </span>
         </p>
-        <p class="detail-value">
-          <span id="uv-index"></span>
-          <span>out of 10</span>
-        </p>
-        <p class="detail-name">
-          <span class="visibility-icon small-icon"></span>
-          <span>Visibility:</span>
-        </p>
-        <p class="detail-value">
+        <!-- visibility -->
+        <p class="detail flex">
+          <span>
+            <span class="visibility-icon detail-icon"></span>
+            <span>Visibility:</span>
+          </span>
           <span id="visibility"></span>
         </p>
-        <p class="detail-name">
-          <span class="moon-icon small-icon"></span>
-          <span>Moon phase:</span>
-        </p>
-        <p class="detail-value">
+        <!-- moon phase -->
+        <p class="detail flex">
+          <span>
+            <span class="moon-icon detail-icon"></span>
+            <span>Moon phase:</span>
+          </span>
           <span id="moon-phase"></span>
         </p>
-        <p class="detail-name">
-          <span class="sunrise-icon small-icon"></span>
-          <span>Sunrise:</span>
-        </p>
-        <p class="detail-value">
+        <!-- sunrise -->
+        <p class="detail flex">
+          <span>
+            <span class="sunrise-icon detail-icon"></span>
+            <span>Sunrise:</span>
+          </span>
           <span id="sunrise"></span>
         </p>
-        <p class="detail-name">
-          <span class="sunset-icon small-icon"></span>
-          <span>Sunset:</span>
-        </p>
-        <p class="detail-value">
+        <!-- sunset -->
+        <p class="detail flex">
+          <span>
+            <span class="sunset-icon detail-icon"></span>
+            <span>Sunset:</span>
+          </span>
           <span id="sunset"></span>
         </p>
       </div>
       <div id="hours" class="flex flex-column">
-        <div id="hour-1" class="hour grid">
-          <p id="hour-1-time"></p>
+        <div id="hour-1" class="hour flex">
+          <p id="hour-1-time" class="time-width"></p>
           <img id="hour-1-icon" class="medium-icon"/>
-          <p><span id="hour-1-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-1-temp"></span>&deg;</p>
           <p>
             <span id="hour-1-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-1-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-1-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-2" class="hour grid">
-          <p id="hour-2-time"></p>
+        <div id="hour-2" class="hour flex">
+          <p id="hour-2-time" class="time-width"></p>
           <img id="hour-2-icon" class="medium-icon"/>
-          <p><span id="hour-2-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-2-temp"></span>&deg;</p>
           <p>
             <span id="hour-2-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-2-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-2-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-3" class="hour grid">
-          <p id="hour-3-time"></p>
+        <div id="hour-3" class="hour flex">
+          <p id="hour-3-time" class="time-width"></p>
           <img id="hour-3-icon" class="medium-icon"/>
-          <p><span id="hour-3-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-3-temp"></span>&deg;</p>
           <p>
             <span id="hour-3-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-3-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-3-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-4" class="hour grid">
-          <p id="hour-4-time"></p>
+        <div id="hour-4" class="hour flex">
+          <p id="hour-4-time" class="time-width"></p>
           <img id="hour-4-icon" class="medium-icon"/>
-          <p><span id="hour-4-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-4-temp"></span>&deg;</p>
           <p>
             <span id="hour-4-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-4-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-4-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-5" class="hour grid">
-          <p id="hour-5-time"></p>
+        <div id="hour-5" class="hour flex">
+          <p id="hour-5-time" class="time-width"></p>
           <img id="hour-5-icon" class="medium-icon"/>
-          <p><span id="hour-5-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-5-temp"></span>&deg;</p>
           <p>
             <span id="hour-5-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-5-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-5-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-6" class="hour grid">
-          <p id="hour-6-time"></p>
+        <div id="hour-6" class="hour flex">
+          <p id="hour-6-time" class="time-width"></p>
           <img id="hour-6-icon" class="medium-icon"/>
-          <p><span id="hour-6-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-6-temp"></span>&deg;</p>
           <p>
             <span id="hour-6-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-6-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-6-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-7" class="hour grid">
-          <p id="hour-7-time"></p>
+        <div id="hour-7" class="hour flex">
+          <p id="hour-7-time" class="time-width"></p>
           <img id="hour-7-icon" class="medium-icon"/>
-          <p><span id="hour-7-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-7-temp"></span>&deg;</p>
           <p>
             <span id="hour-7-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-7-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-7-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-8" class="hour grid">
-          <p id="hour-8-time"></p>
+        <div id="hour-8" class="hour flex">
+          <p id="hour-8-time" class="time-width"></p>
           <img id="hour-8-icon" class="medium-icon"/>
-          <p><span id="hour-8-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-8-temp"></span>&deg;</p>
           <p>
             <span id="hour-8-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-8-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-8-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-9" class="hour grid">
-          <p id="hour-9-time"></p>
+        <div id="hour-9" class="hour flex">
+          <p id="hour-9-time" class="time-width"></p>
           <img id="hour-9-icon" class="medium-icon"/>
-          <p><span id="hour-9-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-9-temp"></span>&deg;</p>
           <p>
             <span id="hour-9-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-9-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-9-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-10" class="hour grid">
-          <p id="hour-10-time"></p>
+        <div id="hour-10" class="hour flex">
+          <p id="hour-10-time" class="time-width"></p>
           <img id="hour-10-icon" class="medium-icon"/>
-          <p><span id="hour-10-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-10-temp"></span>&deg;</p>
           <p>
             <span id="hour-10-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-10-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-10-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-11" class="hour grid">
-          <p id="hour-11-time"></p>
+        <div id="hour-11" class="hour flex">
+          <p id="hour-11-time" class="time-width"></p>
           <img id="hour-11-icon" class="medium-icon"/>
-          <p><span id="hour-11-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-11-temp"></span>&deg;</p>
           <p>
             <span id="hour-11-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-11-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-11-precipitation"></span>%</span>
           </p>
         </div>
-        <div id="hour-12" class="hour grid">
-          <p id="hour-12-time"></p>
+        <div id="hour-12" class="hour flex">
+          <p id="hour-12-time" class="time-width"></p>
           <img id="hour-12-icon" class="medium-icon"/>
-          <p><span id="hour-12-temp"></span>&deg;</p>
+          <p class="temp-width"><span id="hour-12-temp"></span>&deg;</p>
           <p>
             <span id="hour-12-precipitation-icon" class="rain-icon small-icon"></span>
-            <span id="hour-12-precipitation"></span>%
+            <span class="precipitation-width"><span id="hour-12-precipitation"></span>%</span>
           </p>
         </div>
       </div>

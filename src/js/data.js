@@ -179,7 +179,7 @@ export default async function getData(searchTerm) {
           minutes = `0${minutes}`;
         }
 
-        return `UTC${sign}${hours}:${minutes}`;
+        return `(UTC${sign}${hours}:${minutes})`;
       }
 
       function formatMoonPhase(phase) {
@@ -205,13 +205,13 @@ export default async function getData(searchTerm) {
   }
 
   /**
-   * Checks if the data is fresh (no older than 1 hour)
+   * Checks if the data is fresh (no older than 30 minutes)
    * @param {JSON} data Data object from sessionStorage
-   * @returns {boolean} True if the data is no older than 1 hour, false otherwise
+   * @returns {boolean} True if the data is no older than 30 minutes, false otherwise
    */
   function freshData(data) {
     const date = new Date(data.epoch * 1000);
-    return Date.now() - date.getTime() < 3600000;
+    return Date.now() - date.getTime() < 1800000;
   }
 
   async function getLocation() {

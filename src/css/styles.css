@@ -139,7 +139,7 @@ button:hover {
   text-align: center;
 }
 
-#location-info {
+#info {
   text-align: center;
   margin: auto;
 }
@@ -150,7 +150,7 @@ button:hover {
 
 /* -------------------------------- MAIN -------------------------------- */
 #home {
-  width: clamp(55rem, calc(100% * 2 / 3), 100rem);
+  width: clamp(68rem, calc(100% * 2 / 3), 100rem);
   grid-template-columns: 3fr 2fr;
   grid-auto-rows: auto;
   margin: 1rem auto;
@@ -174,8 +174,9 @@ button:hover {
 
 .day {
   height: 5rem;
-  grid-template-columns: repeat(4, 1fr);
   padding: 0.25rem;
+  margin: 0 0.25rem;
+  justify-content: space-between;
 }
 
 .day,
@@ -188,14 +189,23 @@ button:hover {
   margin: auto 0;
 }
 
+.day:not(:first-child) {
+  border-top: 1px solid var(--grey);
+}
+
 .day > p,
 .hour > p,
 #details > p {
   font-size: 1.25rem;
 }
 
-.day:not(:first-child) {
-  border-top: 1px solid var(--grey);
+.day-temps {
+  width: 5rem;
+}
+
+.precipitation-width {
+  display: inline-block;
+  width: 4rem;
 }
 
 .medium-icon {
@@ -233,20 +243,20 @@ button:hover {
 }
 
 #details {
-  grid-template-columns: repeat(4, 1fr);
   margin-top: 1rem;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
 }
 
-#details > * {
+.detail {
   border-bottom: 1px solid var(--grey);
+  justify-content: space-between;
 }
 
-.detail-name:nth-child(4n + 3) {
-  margin-left: 1rem;
-}
-
-.detail-value:nth-child(4n + 2) {
-  margin-right: 1rem;
+.detail-icon {
+  display: inline-block;
+  width: 1.5rem;
+  text-align: center;
 }
 
 .detail-value {
@@ -263,12 +273,26 @@ button:hover {
 }
 
 .hour {
+  margin: 0 0.25rem;
+  padding: 0.25rem 1rem 0.25rem 0;
+  justify-content: space-between;
   grid-template-columns: repeat(4, 1fr);
-  padding: 0.25rem;
 }
 
 .hour:not(:first-child) {
   border-top: 1px solid var(--grey);
+}
+
+.hour > * {
+  display: inline-block;
+}
+
+.time-width {
+  width: 5.5rem;
+}
+
+.temp-width {
+  width: 3rem;
 }
 
 /* -------------------------------- FOOTER -------------------------------- */

@@ -3,6 +3,7 @@ import getData from "./data.js";
 import { library, icon } from "@fortawesome/fontawesome-svg-core";
 import {
   faMagnifyingGlass,
+  faArrowRotateRight,
   faCloudRain,
   faSnowflake,
   faCloudMeatball,
@@ -19,6 +20,7 @@ import {
 
 library.add([
   faMagnifyingGlass,
+  faArrowRotateRight,
   faCloudRain,
   faSnowflake,
   faCloudMeatball,
@@ -34,6 +36,7 @@ library.add([
 ]);
 
 const searchIcon = icon(faMagnifyingGlass);
+const refreshIcon = icon(faArrowRotateRight);
 const rainIcon = icon(faCloudRain);
 const snowIcon = icon(faSnowflake);
 const sleetIcon = icon(faCloudShowersHeavy);
@@ -48,7 +51,10 @@ let units = "f";
 
 document.addEventListener("DOMContentLoaded", async () => {
   let data = await getData();
-  document.getElementById("search-button").appendChild(searchIcon.node[0]);
+
+  // Add icons to the page
+  document.getElementById("search-icon").appendChild(searchIcon.node[0]);
+  document.getElementById("refresh-icon").appendChild(refreshIcon.node[0]);
   document.querySelectorAll(".humidity-icon").forEach((element) => {
     element.appendChild(dropIcon.node[0]);
   });
@@ -76,12 +82,24 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.querySelectorAll(".sunset-icon").forEach((element) => {
     element.appendChild(sunIcon.node[0]);
   });
+
+  // Add event listeners
   document.getElementById("search-button").addEventListener("click", search);
+
   document.getElementById("search-input").addEventListener("keyup", (event) => {
     if (event.key === "Enter") {
       search();
     }
   });
+
+  document.getElementById("search-input").addEventListener("focus", showSearchIcon);
+  
+  document.getElementById("search-input").addEventListener("blur", function (event) {
+    if (event.target.value === "") {
+      showRefreshIcon();
+    }
+  });
+
   document.querySelectorAll(".unit-button").forEach((element) => {
     element.addEventListener("click", unitSwitch);
   });
@@ -154,8 +172,8 @@ function populateWeekInfo(data) {
 }
 
 function populateCurrentInfo(data) {
-  document.getElementById("location").textContent = data.city;
-  document.getElementById("date").textContent = data.dateTimeString;
+  document.getElementById("location-info").textContent = data.city;
+  document.getElementById("date-info").textContent = data.dateTimeString;
   document.getElementById("desc").textContent = data.description;
   document.querySelector("body").style.backgroundImage =
     `url(${data.backgroundSrc.src})`;
@@ -277,7 +295,7 @@ function populateHourlyInfo(data) {
 }
 
 function showLoading() {
-  // document.getElementById("location-info").classList.add("hidden");
+  // document.getElementById("info").classList.add("hidden");
   // document.getElementById("home").classList.add("hidden");
   // document.getElementById("img-attr").classList.add("hidden");
   document.getElementById("loading").classList.remove("hidden");
@@ -285,7 +303,7 @@ function showLoading() {
 
 function showHome() {
   document.getElementById("loading").classList.add("hidden");
-  document.getElementById("location-info").classList.remove("hidden");
+  document.getElementById("info").classList.remove("hidden");
   document.getElementById("desc").classList.remove("hidden");
   document.getElementById("home").classList.remove("hidden");
   document.getElementById("img-attr").classList.remove("hidden");
@@ -295,6 +313,7 @@ async function search() {
   hideError();
   const search = document.getElementById("search-input").value;
   document.getElementById("search-input").value = "";
+  showRefreshIcon();
   showLoading();
   let data = await getData(search);
   if (data) {
@@ -351,6 +370,16 @@ function showError(error) {
 function hideError() {
   document.getElementById("error").classList.add("hidden");
   document.getElementById("error").textContent = "";
+}
+
+function showSearchIcon() {
+  document.getElementById("refresh-icon").classList.add("hidden");
+  document.getElementById("search-icon").classList.remove("hidden");
+}
+
+function showRefreshIcon() {
+  document.getElementById("search-icon").classList.add("hidden");
+  document.getElementById("refresh-icon").classList.remove("hidden");
 }
 
 function fToC(f) {
