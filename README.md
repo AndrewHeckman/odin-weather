@@ -1,5 +1,9 @@
-# Weather App
+# WeatherBoy
 
+Simple weather app that displays current conditions and forecast.
+- Get weather data for current location, or search anywhere in the world.
+- View hourly forecast for the next 12 hours and daily forecast for the next 14 days
+- Switch between imperial, metric, and hybrid unit systems.
 
 ## Attribution
 
