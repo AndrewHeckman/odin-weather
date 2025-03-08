@@ -5,6 +5,9 @@ Simple weather app that displays current conditions and forecast.
 - View hourly forecast for the next 12 hours and daily forecast for the next 14 days
 - Switch between imperial, metric, and hybrid unit systems.
 
+## Known Issues
+- Large background images are negatively impacting load times. Can be fixed by removing background images, or fetching asynchronously.
+
 ## Attribution
 
 Weather data from [Visual Crossing Weather API](https://www.visualcrossing.com).
