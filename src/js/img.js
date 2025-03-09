@@ -7,15 +7,15 @@ import partlyCloudyNightIcon from "../img/icons/partly-cloudy-night.svg";
 import rainIcon from "../img/icons/rain.svg";
 import snowIcon from "../img/icons/snow.svg";
 import windIcon from "../img/icons/wind.svg";
-import clearDayBackground from "../img/backgrounds/clear-day.jpg";
-import clearNightBackground from "../img/backgrounds/clear-night.jpg";
-import cloudyBackground from "../img/backgrounds/cloudy.jpg";
-import fogBackground from "../img/backgrounds/fog.jpg";
-import partlyCloudyDayBackground from "../img/backgrounds/partly-cloudy-day.jpg";
-import partlyCloudyNightBackground from "../img/backgrounds/partly-cloudy-night.jpg";
-import rainBackground from "../img/backgrounds/rain.jpg";
-import snowBackground from "../img/backgrounds/snow.jpg";
-import windBackground from "../img/backgrounds/wind.jpg";
+import clearDayBackground from "../img/backgrounds/clear-day.webp";
+import clearNightBackground from "../img/backgrounds/clear-night.webp";
+import cloudyBackground from "../img/backgrounds/cloudy.webp";
+import fogBackground from "../img/backgrounds/fog.webp";
+import partlyCloudyDayBackground from "../img/backgrounds/partly-cloudy-day.webp";
+import partlyCloudyNightBackground from "../img/backgrounds/partly-cloudy-night.webp";
+import rainBackground from "../img/backgrounds/rain.webp";
+import snowBackground from "../img/backgrounds/snow.webp";
+import windBackground from "../img/backgrounds/wind.webp";
 
 const icons = {
   "clear-day": {
