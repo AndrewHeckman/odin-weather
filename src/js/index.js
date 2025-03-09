@@ -86,13 +86,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  document.getElementById("search-input").addEventListener("focus", showSearchIcon);
-  
-  document.getElementById("search-input").addEventListener("blur", function (event) {
-    if (event.target.value === "") {
-      showRefreshIcon();
-    }
-  });
+  document
+    .getElementById("search-input")
+    .addEventListener("focus", showSearchIcon);
+
+  document
+    .getElementById("search-input")
+    .addEventListener("blur", function (event) {
+      if (event.target.value === "") {
+        showRefreshIcon();
+      }
+    });
 
   document.querySelectorAll(".unit-button").forEach((element) => {
     element.addEventListener("click", unitSwitch);
@@ -223,34 +227,62 @@ function populateDetails(data) {
     document
       .getElementById("details-precipitation-icon")
       .classList.remove("snow-icon", "sleet-icon");
-    document.getElementById("details-precipitation-icon").classList.add("rain-icon");
-  }
-  else if (data.precipitationTypeString === "snow") {
+    document
+      .getElementById("details-precipitation-icon")
+      .classList.add("rain-icon");
+  } else if (data.precipitationTypeString === "snow") {
     document
       .getElementById("details-precipitation-icon")
       .classList.remove("rain-icon", "sleet-icon");
-    document.getElementById("details-precipitation-icon").classList.add("snow-icon");
+    document
+      .getElementById("details-precipitation-icon")
+      .classList.add("snow-icon");
   } else {
     document
       .getElementById("details-precipitation-icon")
       .classList.remove("rain-icon", "snow-icon");
-    document.getElementById("details-precipitation-icon").classList.add("sleet-icon");
+    document
+      .getElementById("details-precipitation-icon")
+      .classList.add("sleet-icon");
   }
 }
 
 function populateHourlyInfo(data) {
-  let hourIndex = parseInt(data.dateTime.substring(0, 2)) + 1;
+  let currentHour = parseInt(data.dateTime.substring(0, 2));
+  let hourIndex = currentHour + 1;
   let dayIndex = 0;
 
   for (let i = 1; i < 13; i++) {
-    if (hourIndex === 24) {
-      hourIndex = 0;
-      dayIndex++;
-    }
-    let hour = data.days[dayIndex].hours[hourIndex];
+    let hour;
+    // if (hourIndex === 24) {
+    //   hourIndex = 0;
+    //   dayIndex++;
+    // }
+    // hour = data.days[dayIndex].hours[hourIndex];
+    do {
+      if (hourIndex === 24) {
+        hourIndex = 0;
+        dayIndex++;
+      }
+
+      hour = data.days[dayIndex].hours[hourIndex];
+
+      if (
+        i === 1 &&
+        parseInt(hour.dateTime.substring(0, 2)) != (currentHour + 1) % 24
+      ) {
+        hour = null;
+        hourIndex--;
+        continue;
+      }
+
+      hourIndex++;
+    } while (!hour);
+
     document.getElementById(`hour-${i}-time`).textContent = hour.dateTimeString;
     document.getElementById(`hour-${i}-icon`).src = hour.iconSrc.src;
     document.getElementById(`hour-${i}-icon`).alt = hour.iconSrc.alt;
+
     if (units === "f") {
       document.getElementById(`hour-${i}-temp`).textContent = hour.feelsLike;
     } else if (units === "c" || units === "h") {
@@ -258,6 +290,7 @@ function populateHourlyInfo(data) {
         hour.feelsLike,
       );
     }
+
     document.getElementById(`hour-${i}-precipitation`).textContent =
       hour.precipitationProbability;
 
@@ -284,7 +317,7 @@ function populateHourlyInfo(data) {
         .classList.add("sleet-icon");
     }
 
-    hourIndex++;
+    // hourIndex++;
   }
 }
 
